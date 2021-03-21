@@ -1,7 +1,19 @@
 import React from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
+import Navigator, {
+  NavLinks,
+  NavLink as NavLinkBase,
+} from "../header/Navigator.js";
 import { css } from "styled-components/macro"; //eslint-disable-line
+
+const StyledNav = styled(Navigator)`
+  ${tw`justify-between`}
+`;
+
+const NavLink = tw(NavLinkBase)`
+    sm:text-sm sm:mx-6
+`;
 
 const Container = tw.div`relative -mx-8 -mt-8`;
 const TwoColumn = tw.div`flex flex-col lg:flex-row`;
@@ -16,19 +28,30 @@ const Heading = tw.h1`text-3xl sm:text-5xl md:text-6xl lg:text-5xl font-black le
 const Paragraph = tw.p`max-w-md my-8 lg:my-5 lg:my-8 sm:text-lg lg:text-base xl:text-lg leading-loose`;
 
 const Actions = styled.div`
-    ${tw`mb-8 lg:mb-0`}
-    .action {
-        ${tw`text-center inline-block w-full sm:w-48 py-4 font-semibold tracking-wide rounded hocus:outline-none focus:shadow-outline transition duration-300`}
-    }
-    .primaryAction {
-        ${tw`bg-primary-500 text-gray-100 hover:bg-primary-700`}
-    }
-    .secondaryAction {
-        ${tw`mt-4 sm:mt-0 sm:ml-4 bg-gray-300 text-gray-700 hover:bg-gray-400 hover:text-gray-800`}
-    }
+  ${tw`mb-8 lg:mb-0`}
+  .action {
+    ${tw`text-center inline-block w-full sm:w-48 py-4 font-semibold tracking-wide rounded hocus:outline-none focus:shadow-outline transition duration-300`}
+  }
+  .primaryAction {
+    ${tw`bg-primary-500 text-gray-100 hover:bg-primary-700`}
+  }
+  .secondaryAction {
+    ${tw`mt-4 sm:mt-0 sm:ml-4 bg-gray-300 text-gray-700 hover:bg-gray-400 hover:text-gray-800`}
+  }
 `;
 
 const Hero = ({
+  navLinks = [
+    <NavLinks key={1}>
+      <NavLink href="#">Inicio</NavLink>
+      <NavLink href="/#">Acerca</NavLink>
+      <NavLink href="/#">Productos</NavLink>
+      <NavLink href="/#">Contáctanos</NavLink>
+      <NavLink href="/#" tw="lg:ml-12!">
+        Login
+      </NavLink>
+    </NavLinks>,
+  ],
   heading = (
     <>
       ¡Bienvenida a la familia Nani Shop!
@@ -41,22 +64,23 @@ const Hero = ({
   primaryActionUrl = "#",
   primaryActionText = "Regístrate",
   secondaryActionUrl = "#",
-  secondaryActionText = "Busca productos"
+  secondaryActionText = "Busca productos",
 }) => {
   return (
     <Container>
       <TwoColumn>
         <LeftColumn>
+          <StyledNav links={navLinks} collapseBreakpointClass="sm" />
           <Content>
             <Heading>{heading}</Heading>
             <Paragraph>{description}</Paragraph>
             <Actions>
-                <a href={primaryActionUrl} className="action primaryAction">
-                    {primaryActionText}
-                </a>
-                <a href={secondaryActionUrl} className="action secondaryAction">
-                    {secondaryActionText}
-                </a>
+              <a href={primaryActionUrl} className="action primaryAction">
+                {primaryActionText}
+              </a>
+              <a href={secondaryActionUrl} className="action secondaryAction">
+                {secondaryActionText}
+              </a>
             </Actions>
           </Content>
         </LeftColumn>
