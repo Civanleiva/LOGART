@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import tw from "twin.macro";
 import styled from "styled-components";
+import useAnimatedNavToggler from "../../helpers/useAnimatedNavToggle.js";
 import { css } from "styled-components/macro"; //eslint-disable-line
 
 import { ReactComponent as MenuIcon } from "feather-icons/dist/icons/menu.svg";
@@ -47,6 +48,7 @@ const Navigator = ({ links, className, collapseBreakpointClass = "lg" }) => {
     </NavLinks>,
   ];
 
+  const { showNavLinks, animation, toggleNavbar} = useAnimatedNavToggler();
   const collapseBreakpointCss =
     collapseBreakPointCssMap[collapseBreakpointClass];
 
@@ -63,10 +65,21 @@ const Navigator = ({ links, className, collapseBreakpointClass = "lg" }) => {
       >
         <MobileNavLinks
           initial={{ x: "150%", display: "none" }}
+          animate={animation}
           css={collapseBreakpointCss.mobileNavLinks}
         >
           {links}
         </MobileNavLinks>
+        <NavToggle
+          onClick={toggleNavbar}
+          className={showNavLinks ? "open" : "closed"}
+        >
+          {showNavLinks ? (
+            <CloseIcon tw="w-6 h-6" />
+          ) : (
+            <MenuIcon tw="w-6 h-6" />
+          )}
+        </NavToggle>
       </MobileNavLinksContainer>
     </Header>
   );
