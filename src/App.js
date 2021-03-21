@@ -1,5 +1,6 @@
-import LandingPage from "./Pages/LandingPage.js";
-import './App.css';
+import React from "react";
+import "tailwindcss/dist/base.css";
+import LandingPage from "./pages/LandingPage.js";
 
 function App() {
   return (

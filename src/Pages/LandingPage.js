@@ -1,8 +1,8 @@
 import React from "react";
-
+import Hero from "../components/hero/Hero.js";
 
 const LandingPage = () => (
-    <h1>Hero/Banner</h1>
+    <Hero />
 );
 
 export default LandingPage;
