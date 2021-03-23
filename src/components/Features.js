@@ -8,6 +8,9 @@ import { css } from "styled-components/macro"; //eslint-disable-line
 // } from "../components/misc/Headings.js";
 //import { SectionDescription } from "../components/misc/Typography.js";
 import { Container, ContentWithPaddingXl } from "../components/misc/Layouts.js";
+import Recommended from "../images/recommended.svg"
+import Medal from "../images/medal.svg";
+import Box from "../images/supplies.svg";
 
 // const Heading = tw(SectionHeading)``;
 // const Subheading = tw(SubheadingBase)`text-center mb-3`;
@@ -41,17 +44,17 @@ const Card = styled.a`
 const Features = ({
   cards = [
     {
-      imageSrc: "",
+      imageSrc: Recommended,
       title: "Satisfacción Garantizada",
       description: "Beep boop placeholder text",
     },
     {
-      imageSrc: "",
+      imageSrc: Box,
       title: "Empacado de alta calidad",
       description: "Beep boop placeholder text",
     },
     {
-      imageSrc: "",
+      imageSrc: Medal,
       title: "Cálidad Superior",
       description: "Beep boop placeholder text",
     },
