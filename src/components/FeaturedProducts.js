@@ -31,24 +31,26 @@ const ProductDescription = tw.p``;
 const ProductContainer = styled.div`
   ${tw`relative z-20 mt-10 sm:pt-3 pr-3 w-full sm:w-1/2 lg:w-1/3 max-w-sm mx-auto sm:max-w-none sm:mx-0`}
 
-  ${props => props.featured && css`
-    ${tw`w-full sm:w-full lg:w-2/3`}
-    ${Product} {
-      ${tw`sm:flex-row items-center sm:pr-3`}
-    }
-    ${ProductImage} {
-      ${tw`sm:h-80 sm:min-h-full w-full sm:w-1/2 rounded-t sm:rounded-t-none sm:rounded-l`}
-    }
-    ${ProductText} {
-      ${tw`pl-8 pr-5`}
-    }
-    ${ProductTitle} {
-      ${tw`text-2xl`}
-    }
-    ${ProductDescription} {
-      ${tw`mt-4 text-sm font-semibold text-gray-600 leading-relaxed`}
-    }
-  `}
+  ${(props) =>
+    props.featured &&
+    css`
+      ${tw`w-full sm:w-full lg:w-2/3`}
+      ${Product} {
+        ${tw`sm:flex-row items-center sm:pr-3`}
+      }
+      ${ProductImage} {
+        ${tw`sm:h-80 sm:min-h-full w-full sm:w-1/2 rounded-t sm:rounded-t-none sm:rounded-l`}
+      }
+      ${ProductText} {
+        ${tw`pl-8 pr-5`}
+      }
+      ${ProductTitle} {
+        ${tw`text-2xl`}
+      }
+      ${ProductDescription} {
+        ${tw`mt-4 text-sm font-semibold text-gray-600 leading-relaxed`}
+      }
+    `}
 `;
 
 const Productos = ({
@@ -90,30 +92,32 @@ const Productos = ({
   ],
 }) => {
   return (
-    <Container>
-      <ContentWithPaddingXl>
-        <HeadingContainer>
-          {subheading && <Subheading>{subheading}</Subheading>}
-          {heading && <Heading>{heading}</Heading>}
-          {description && <Description>{description}</Description>}
-        </HeadingContainer>
-        <Products>
-          {products.map((product, index) => (
-            <ProductContainer key={index}>
-              <Product className="group">
-                <ProductImage imageSrc={product.productImageSrc} />
-                <ProductText>
-                  <ProductTitle>{product.productTitle}</ProductTitle>
-                  <ProductDescription>
-                    {product.productDescription}
-                  </ProductDescription>
-                </ProductText>
-              </Product>
-            </ProductContainer>
-          ))}
-        </Products>
-      </ContentWithPaddingXl>
-    </Container>
+    <div id="Products">
+      <Container>
+        <ContentWithPaddingXl>
+          <HeadingContainer>
+            {subheading && <Subheading>{subheading}</Subheading>}
+            {heading && <Heading>{heading}</Heading>}
+            {description && <Description>{description}</Description>}
+          </HeadingContainer>
+          <Products>
+            {products.map((product, index) => (
+              <ProductContainer key={index}>
+                <Product className="group">
+                  <ProductImage imageSrc={product.productImageSrc} />
+                  <ProductText>
+                    <ProductTitle>{product.productTitle}</ProductTitle>
+                    <ProductDescription>
+                      {product.productDescription}
+                    </ProductDescription>
+                  </ProductText>
+                </Product>
+              </ProductContainer>
+            ))}
+          </Products>
+        </ContentWithPaddingXl>
+      </Container>
+    </div>
   );
 };
 

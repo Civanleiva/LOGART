@@ -39,8 +39,7 @@ const Hero = ({
   navLinks = [
     <NavLinks key={1}>
       <NavLink href="#">Inicio</NavLink>
-      <NavLink href="/#">Acerca</NavLink>
-      <NavLink href="/#">Productos</NavLink>
+      <NavLink href="#Products">Productos</NavLink>
       <NavLink href="/#">Contáctanos</NavLink>
       <NavLink href="/#" tw="lg:ml-12!">
         Login
