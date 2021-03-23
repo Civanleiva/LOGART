@@ -23,25 +23,27 @@ const SocialLink = styled.a`
 
 const Footer = () => {
   return (
-    <Container>
-      <Content>
-        <Row>
-          <LinksContainer>
-            <Link href="#">Inicio</Link>
-            <Link href="#">Acerca</Link>
-            <Link href="#Products">Productos</Link>
-          </LinksContainer>
-          <SocialLinksContainer>
+    <div id="Contact">
+      <Container>
+        <Content>
+          <Row>
+            <LinksContainer>
+              <Link href="#">Inicio</Link>
+              <Link href="#">Acerca</Link>
+              <Link href="#Products">Productos</Link>
+            </LinksContainer>
+            <SocialLinksContainer>
               <SocialLink href="https://web.facebook.com/Logart-463965557707247/">
-                  <FacebookIcon />
+                <FacebookIcon />
               </SocialLink>
               <SocialLink href="https://www.instagram.com/logart_customs/">
-                  <InstagramIcon />
+                <InstagramIcon />
               </SocialLink>
-          </SocialLinksContainer>
-        </Row>
-      </Content>
-    </Container>
+            </SocialLinksContainer>
+          </Row>
+        </Content>
+      </Container>
+    </div>
   );
 };
 
