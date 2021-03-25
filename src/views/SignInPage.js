@@ -30,11 +30,16 @@ const SubmitButton = styled.button`
 `;
 
 const LogoContainer = tw.div`sm:rounded-r-lg flex-1 bg-black text-center hidden lg:flex justify-center`;
+const Logo = styled.div`
+  ${props => `background-image: url("${props.imageSrc}");`}
+  ${tw`m-12 xl:m-16 w-full max-w-sm bg-contain bg-center bg-no-repeat`}
+`;
 
 const SignInPage = ({
   headingText = "Inicie Sesión",
   submitButtontext = "Iniciar Sesión",
   SubmitButtonIcon = LoginIcon,
+  logoURL = "https://i.ibb.co/Bt10090/bg-2.png"
 }) => {
   return (
     <Container>
@@ -55,10 +60,14 @@ const SignInPage = ({
                   </SubmitButtonIcon>
                 </SubmitButton>
               </Form>
+              <p tw="mt-8 text-sm text-gray-600 text-center">¿No tiene una cuenta? <br />
+              <a href="/#" tw="border-b border-gray-500 border-dotted">Registrese</a>
+              </p>
             </FormContainer>
           </MainContent>
         </MainContainer>
         <LogoContainer>
+          <Logo imageSrc={logoURL} />
         </LogoContainer>
       </Content>
     </Container>
