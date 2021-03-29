@@ -4,10 +4,25 @@ import "tailwindcss/dist/base.css";
 import LandingPage from "./views/LandingPage.js";
 import SignInPage from "./views/SignInPage";
 import SignUpPage from "./views/SignUpPage";
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 
 function App() {
   return (
-    <SignUpPage />
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          <LandingPage />
+        </Route>
+
+        <Route path="/Signin/">
+          <SignInPage />
+        </Route>
+
+        <Route path="/Signup/">
+          <SignUpPage />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 

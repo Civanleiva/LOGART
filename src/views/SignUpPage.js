@@ -64,7 +64,7 @@ const SignUpPage = ({
               </Form>
               <p tw="mt-8 text-sm text-gray-600 text-center">
                   ¿Ya tiene una cuenta?<br/>
-                  <a href="/#" tw="border-b border-gray-500 border-dotted">
+                  <a href="/Signin" tw="border-b border-gray-500 border-dotted">
                     Inicie Sesión
                   </a>
                 </p>
