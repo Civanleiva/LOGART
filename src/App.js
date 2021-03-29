@@ -5,6 +5,7 @@ import LandingPage from "./views/LandingPage.js";
 import SignInPage from "./views/SignInPage";
 import SignUpPage from "./views/SignUpPage";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import OrderProductPage from "./views/OrderProductPage";
 
 function App() {
   return (
@@ -20,6 +21,10 @@ function App() {
 
         <Route path="/Signup/">
           <SignUpPage />
+        </Route>
+
+        <Route path="/OrderProduct">
+          <OrderProductPage />
         </Route>
       </Switch>
     </Router>
