@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import tw from "twin.macro";
 import { css } from "styled-components/macro"; //eslint-disable-line
 import Footer from "../components/Footer";
 import { GithubPicker } from "react-color";
+import { FilePond, registerPlugin } from "react-filepond";
+import "filepond/dist/filepond.min.css"; //esl-disable-line
+import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
+import FilePondPluginImagePreview from "filepond-plugin-image-preview";
+import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"; //esl-disable-line
+
+registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
 const Section = tw.section`text-gray-700  overflow-hidden bg-white`;
 const Container = tw.div`container px-5 py-24`;
@@ -20,8 +27,10 @@ const Dropdown = tw.select`rounded border border-gray-400 py-2 focus:outline-non
 
 const OrderButton = tw.button`flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded`;
 
+
 const OrderProductPage = ({
   productTitle = "Camisa personalizada",
+  fileLabel = "Arrastre sus imagenes aqui o <span class='filepond--label-action'>suba desde su dispositivo</span>",
   colors = [
     "#FFF",
     "#B80000",
@@ -32,6 +41,7 @@ const OrderProductPage = ({
     "#004DCF",
   ],
 }) => {
+  const [files, setFiles] = useState([]);
   return (
     <Section>
       <Section>
@@ -46,33 +56,40 @@ const OrderProductPage = ({
                 </ColorsContainer>
               </ProductOptions>
               <DropdownContainer>
-                  <span tw="pr-5 pl-5">Size</span>
-                  <Dropdown>
-                    <option>10</option>
-                    <option>12</option>
-                    <option>14</option>
-                    <option>S</option>
-                    <option>M</option>
-                    <option>L</option>
-                    <option>XL</option>
-                  </Dropdown>
+                <span tw="pr-5 pl-5">Size</span>
+                <Dropdown>
+                  <option>10</option>
+                  <option>12</option>
+                  <option>14</option>
+                  <option>S</option>
+                  <option>M</option>
+                  <option>L</option>
+                  <option>XL</option>
+                </Dropdown>
               </DropdownContainer>
               <DropdownContainer>
-                  <span tw="pr-5 pl-5">Serigrafía</span>
-                  <Dropdown>
-                    <option>Vinilo</option>
-                    <option>Papel Transfer</option>
-                    <option>Bordado</option>
-                  </Dropdown>
-                </DropdownContainer>
-                <DropdownContainer>
-                  <span tw="pr-5 pl-5">Estilo</span>
-                  <Dropdown>
-                    <option>Cuello redondo</option>
-                    <option>Cuello V</option>
-                    <option>Polo</option>
-                  </Dropdown>
-                </DropdownContainer>
+                <span tw="pr-5 pl-5">Material</span>
+                <Dropdown>
+                  <option>Vinilo</option>
+                  <option>Papel Transfer</option>
+                  <option>Bordado</option>
+                </Dropdown>
+              </DropdownContainer>
+              <DropdownContainer>
+                <span tw="pr-5 pl-5">Estilo</span>
+                <Dropdown>
+                  <option>Cuello redondo</option>
+                  <option>Cuello V</option>
+                  <option>Polo</option>
+                </Dropdown>
+              </DropdownContainer>
+              <span tw="p-2"></span>
+              <FilePond
+                files={files}
+                onupdatefiles={setFiles}
+                allowMultiple={false}
+                labelIdle={fileLabel}
+              ></FilePond>
             </ProductDetails>
             <ColorsContainer>
               <OrderButton>Cotice ahora</OrderButton>
