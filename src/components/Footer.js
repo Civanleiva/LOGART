@@ -28,7 +28,7 @@ const Footer = () => {
         <Content>
           <Row>
             <LinksContainer>
-              <Link href="#">Inicio</Link>
+              <Link href="/">Inicio</Link>
               <Link href="#">Acerca</Link>
               <Link href="#Products">Productos</Link>
             </LinksContainer>
