@@ -27,32 +27,66 @@ const Dropdown = tw.select`rounded border border-gray-400 py-2 focus:outline-non
 
 const OrderButton = tw.button`flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded`;
 
-
 const OrderProductPage = ({
   productTitle = "Camisa personalizada",
-  fileLabel = "Arrastre sus imagenes aqui o <span class='filepond--label-action'>suba desde su dispositivo</span>",
-  colors = [
+  fileLabel = "Arrastre sus imagenes aquí o <span class='filepond--label-action'>suba desde su dispositivo</span>",
+  basicColors = [
+    "#FFFF00",
+    "#FFA500",
+    "#0000FF",
     "#FFF",
-    "#B80000",
+    "#808080",
+    "#C3B091",
     "#000",
-    "#FCCB00",
-    "#008B02",
-    "#800080",
-    "#004DCF",
+    "#FF0000",
+    "#00FF00",
+  ],
+  poloColors = [
+    "#0000FF",
+    "#000",
+    "#5E1E54",
+    "#008000",
+    "#771E1F",
+    "#FFFF00",
+    "#FFA500",
+    "#FFF",
+    "#D2691E",
+    "#FF77FF",
+    "#A9A9A9",
+    "#00A86B",
+    "#C3B091",
+    "#000080",
   ],
 }) => {
   const [files, setFiles] = useState([]);
+  const [shirtType, setShirtType] = useState("basic");
+  const [shirtColor, setShirtColor] = useState("#FFFFFF");
+
+  function handleShirtChange(event) {
+    setShirtType(event.target.value);
+    setShirtColor("#FFFFFF")
+  }
+
+  function handleShirtColorChange(color) {
+    setShirtColor(color.hex);
+  }
+
   return (
     <Section>
       <Section>
         <Container>
           <Content>
-            <Image src="https://i.pinimg.com/originals/2f/bb/66/2fbb6650a2b6b07aee93909b1f248e24.png" />
+            <Image src={`/images/${shirtType}/${shirtColor}.png`.replace("#", "")} />
             <ProductDetails>
               <ProductTitle>{productTitle}</ProductTitle>
               <ProductOptions>
                 <ColorsContainer>
-                  <GithubPicker colors={colors} triangle="hide" />
+                  <GithubPicker
+                    colors={shirtType === "basic" ? basicColors : poloColors}
+                    triangle="hide"
+                    onChangeComplete={handleShirtColorChange}
+                    color={shirtColor}
+                  />
                 </ColorsContainer>
               </ProductOptions>
               <DropdownContainer>
@@ -77,10 +111,9 @@ const OrderProductPage = ({
               </DropdownContainer>
               <DropdownContainer>
                 <span tw="pr-5 pl-5">Estilo</span>
-                <Dropdown>
-                  <option>Cuello redondo</option>
-                  <option>Cuello V</option>
-                  <option>Polo</option>
+                <Dropdown value={shirtType} onChange={handleShirtChange}>
+                  <option value="basic">Cuello redondo</option>
+                  <option value="polo">Polo</option>
                 </Dropdown>
               </DropdownContainer>
               <span tw="p-2"></span>
