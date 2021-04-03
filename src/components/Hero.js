@@ -6,6 +6,8 @@ import Navigator, {
   NavLink as NavLinkBase,
 } from "./header/Navigator.js";
 import { css } from "styled-components/macro"; //eslint-disable-line
+import { useDispatch, useSelector } from "react-redux";
+import { signout } from "../actions/userActions.js";
 
 const NavLink = tw(NavLinkBase)`
     sm:text-sm sm:mx-6
@@ -36,16 +38,7 @@ const Heading = styled.h1`
 `;
 
 const Hero = ({
-  navLinks = [
-    <NavLinks key={1}>
-      <NavLink href="#">Inicio</NavLink>
-      <NavLink href="#Products">Productos</NavLink>
-      <NavLink href="#Contact">Contáctanos</NavLink>
-      <NavLink href="/SignIn" tw="lg:ml-12!">
-        Login
-      </NavLink>
-    </NavLinks>,
-  ],
+  
   heading = (
     <>
       LOGART
@@ -54,12 +47,36 @@ const Hero = ({
       <span tw="text-primary-500">Calidad, la única opción</span>
     </>
   ),
-  // description = "Something I'm not creative enough to come up with",
-  // primaryActionUrl = "#",
-  // primaryActionText = "Regístrate",
-  // secondaryActionUrl = "#",
-  // secondaryActionText = "Busca productos",
 }) => {
+  const userSignedIn = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignedIn;
+
+  const dispatch = useDispatch()
+
+  const signOutHandler = () => {
+    dispatch(signout());
+  }
+
+  const navLinks = [
+    <NavLinks key={1}>
+      <NavLink href="#">Inicio</NavLink>
+      <NavLink href="#Products">Productos</NavLink>
+      <NavLink href="#Contact">Contáctanos</NavLink>
+      {
+        userInfo ? (
+          <>
+        <NavLink href="/SignIn" tw="lg:ml-12!">
+          {userInfo.name}
+        </NavLink>
+        <NavLink href="#signout" onClick={signOutHandler}>Cerrar Sesión</NavLink>
+          </>
+        ) :
+        <NavLink href="/SignIn" tw="lg:ml-12!">
+          Login
+        </NavLink>
+      }
+    </NavLinks>,
+  ];
   return (
     <Container>
       <OpacityOverlay />

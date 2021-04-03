@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container as ContainerBase } from "../components/misc/Layouts.js";
 import tw from "twin.macro";
 import styled from "styled-components";
 import { css } from "styled-components/macro"; //eslint-disable-line
 import { ReactComponent as LoginIcon } from "feather-icons/dist/icons/log-in.svg";
+import { signin } from "../actions/userActions.js";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 const Container = tw(
   ContainerBase
@@ -31,37 +34,76 @@ const SubmitButton = styled.button`
 
 const LogoContainer = tw.div`sm:rounded-r-lg flex-1 bg-black text-center hidden lg:flex justify-center`;
 const Logo = styled.div`
-  ${props => `background-image: url("${props.imageSrc}");`}
+  ${(props) => `background-image: url("${props.imageSrc}");`}
   ${tw`m-12 xl:m-16 w-full max-w-sm bg-contain bg-center bg-no-repeat`}
 `;
+
+const ErrorBox = tw.div`bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative`;
 
 const SignInPage = ({
   headingText = "Inicie Sesión",
   submitButtontext = "Iniciar Sesión",
   SubmitButtonIcon = LoginIcon,
-  logoURL = "https://i.ibb.co/Bt10090/bg-2.png"
+  logoURL = "https://i.ibb.co/Bt10090/bg-2.png",
 }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  let history = useHistory();
+
+  const redirect = "/";
+
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo, error } = userSignin;
+
+  const dispatch = useDispatch();
+
+  const signinSubmit = (e) => {
+    e.preventDefault();
+    dispatch(signin(email, password));
+  };
+
+  useEffect(() => {
+    if (userInfo) {
+      history.push(redirect);
+    }
+  }, [userInfo, history, redirect]);
   return (
     <Container>
       <Content>
         <MainContainer>
           <MainContent>
             <Heading>{headingText}</Heading>
+            
             <DividerTextContainer>
               <DividerText></DividerText>
+              {error && <ErrorBox>{error}</ErrorBox>}
             </DividerTextContainer>
             <FormContainer>
-              <Form>
-                <Input type="email" placeholder="Correo" />
-                <Input type="password" placeholder="Contraseña" />
+              <Form onSubmit={signinSubmit}>
+                <Input
+                  type="email"
+                  placeholder="Correo"
+                  required
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <Input
+                  type="password"
+                  placeholder="Contraseña"
+                  required
+                  onChange={(e) => setPassword(e.target.value)}
+                />
                 <SubmitButton type="submit">
                   <SubmitButtonIcon className="icon">
                     <span className="text">{submitButtontext}</span>
                   </SubmitButtonIcon>
                 </SubmitButton>
               </Form>
-              <p tw="mt-8 text-sm text-gray-600 text-center">¿No tiene una cuenta? <br />
-              <a href="/Signup" tw="border-b border-gray-500 border-dotted">Registrese</a>
+              <p tw="mt-8 text-sm text-gray-600 text-center">
+                ¿No tiene una cuenta? <br />
+                <a href="/Signup" tw="border-b border-gray-500 border-dotted">
+                  Registrese
+                </a>
               </p>
             </FormContainer>
           </MainContent>
