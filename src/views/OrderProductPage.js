@@ -115,7 +115,8 @@ const OrderProductPage = ({
 
   useEffect(() => {
     if (success) {
-      history.push(`/order/${order._id}`);
+      alert("Orden completada con exito, pronto recibirá un correo con detalles")
+      history.push('/');
       dispatch({ type: ORDER_CREATE_RESET });
     }
   }, [success, dispatch, history, order]);
