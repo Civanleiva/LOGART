@@ -99,6 +99,7 @@ const OrderProductPage = ({
   let history = useHistory();
 
   const placeOrderHandler = () => {
+    console.log(files[0].getFileEncodeBase64String())
     dispatch(
       createOrder([
         {
@@ -106,7 +107,7 @@ const OrderProductPage = ({
           shirtColor: shirtColor,
           shirtMaterial: printMaterial,
           shirtSize: shirtSize,
-          image: files[0],
+          image: files[0].getFileEncodeBase64String(),
         },
       ])
     );
@@ -114,7 +115,6 @@ const OrderProductPage = ({
 
   useEffect(() => {
     if (success) {
-      console.log(order._id);
       history.push(`/order/${order._id}`);
       dispatch({ type: ORDER_CREATE_RESET });
     }
@@ -176,6 +176,7 @@ const OrderProductPage = ({
                 onupdatefiles={setFiles}
                 allowMultiple={false}
                 labelIdle={fileLabel}
+                allowFileEncode={true}
               ></FilePond>
             </ProductDetails>
             <ColorsContainer>

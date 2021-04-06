@@ -16,8 +16,6 @@ export const signin = (email, password) => async (dispatch) => {
     const { data } = await axios.post("/api/users/signin", { email, password });
     dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
     localStorage.setItem("userInfo", JSON.stringify(data));
-    console.log(data)
-    console.log(localStorage)
   } catch (err) {
     dispatch({
       type: USER_SIGNIN_FAILED,
