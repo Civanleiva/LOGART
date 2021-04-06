@@ -37,7 +37,7 @@ const Logo = styled.div`
 
 const SignUpPage = ({
   headingText = "Cree una cuenta con LOGART",
-  submitButtontext = "Registrar",
+  submitButtonText = "Registrar",
   SubmitButtonIcon = SignUpIcon,
   logoURL = "https://i.ibb.co/Bt10090/bg-2.png",
 }) => {
@@ -53,21 +53,23 @@ const SignUpPage = ({
             <FormContainer>
               <Form>
                 <Input type="email" placeholder="Correo" />
+                <Input type="text" placeholder="Nombre" />
                 <Input type="password" placeholder="Contraseña" />
                 <Input type="password" placeholder="Confirmar Contraseña" />
                 <Input type="tel" placeholder="Número de Teléfono" />
                 <SubmitButton type="submit">
                   <SubmitButtonIcon className="icon">
-                    <span className="text">{submitButtontext}</span>
+                    <span className="text">{submitButtonText}</span>
                   </SubmitButtonIcon>
                 </SubmitButton>
               </Form>
               <p tw="mt-8 text-sm text-gray-600 text-center">
-                  ¿Ya tiene una cuenta?<br/>
-                  <a href="/Signin" tw="border-b border-gray-500 border-dotted">
-                    Inicie Sesión
-                  </a>
-                </p>
+                ¿Ya tiene una cuenta?
+                <br />
+                <a href="/Signin" tw="border-b border-gray-500 border-dotted">
+                  Inicie Sesión
+                </a>
+              </p>
             </FormContainer>
           </MainContent>
         </MainContainer>
