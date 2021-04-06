@@ -1,7 +1,7 @@
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import thunk from "redux-thunk";
 import { orderCreateReducer } from "./reducers/orderReducer";
-import { userSigninReducer } from "./reducers/userReducer";
+import { userRegisterReducer, userSigninReducer } from "./reducers/userReducer";
 
 const initialState = {
   userSignin: {
@@ -13,6 +13,7 @@ const initialState = {
 
 const reducer = combineReducers({
   userSignin: userSigninReducer,
+  userRegister: userRegisterReducer,
   orderCreate: orderCreateReducer,
 });
 

@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container as ContainerBase } from "../components/misc/Layouts.js";
 import tw from "twin.macro";
 import styled from "styled-components";
 import { css } from "styled-components/macro"; //eslint-disable-line
 import { ReactComponent as SignUpIcon } from "feather-icons/dist/icons/user-plus.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router";
+import { register } from "../actions/userActions.js";
 
 const Container = tw(
   ContainerBase
@@ -35,12 +38,39 @@ const Logo = styled.div`
   ${tw`m-12 xl:m-16 w-full max-w-sm bg-contain bg-center bg-no-repeat`}
 `;
 
+const ErrorBox = tw.div`bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative`;
+
 const SignUpPage = ({
   headingText = "Cree una cuenta con LOGART",
   submitButtonText = "Registrar",
   SubmitButtonIcon = SignUpIcon,
   logoURL = "https://i.ibb.co/Bt10090/bg-2.png",
 }) => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const userRegister = useSelector((state) => state.userRegister);
+  const { userInfo, error } = userRegister;
+
+  const dispatch = useDispatch();
+  let history = useHistory();
+
+  const registerHandler = (e) => {
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      alert('Las contraseñas no coinciden');
+    }
+    dispatch(register(name, email, password));
+  };
+
+  useEffect(() => {
+    if (userInfo) {
+      history.push("/");
+    }
+  }, [history, userInfo]);
+
   return (
     <Container>
       <Content>
@@ -49,14 +79,15 @@ const SignUpPage = ({
             <Heading>{headingText}</Heading>
             <DividerTextContainer>
               <DividerText></DividerText>
+              {error && <ErrorBox>{error}</ErrorBox>}
             </DividerTextContainer>
             <FormContainer>
-              <Form>
-                <Input type="email" placeholder="Correo" />
-                <Input type="text" placeholder="Nombre" />
-                <Input type="password" placeholder="Contraseña" />
-                <Input type="password" placeholder="Confirmar Contraseña" />
-                <Input type="tel" placeholder="Número de Teléfono" />
+              <Form onSubmit={registerHandler}>
+                <Input type="email" placeholder="Correo" onChange={(e) => setEmail(e.target.value)} required/>
+                <Input type="text" placeholder="Nombre" onChange={(e) => setName(e.target.value)} required/>
+                <Input type="password" placeholder="Contraseña" onChange={(e) => setPassword(e.target.value)} required/>
+                <Input type="password" placeholder="Confirmar Contraseña" onChange={(e) => setConfirmPassword(e.target.value)} required/>
+                {/* <Input type="tel" placeholder="Número de Teléfono" /> */}
                 <SubmitButton type="submit">
                   <SubmitButtonIcon className="icon">
                     <span className="text">{submitButtonText}</span>
