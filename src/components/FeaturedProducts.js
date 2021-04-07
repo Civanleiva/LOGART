@@ -5,13 +5,13 @@ import styled from "styled-components";
 import { css } from "styled-components/macro";
 import {
   SectionHeading,
-  Subheading as SubjeadingBase,
+  Subheading as SubheadingBase,
 } from "./misc/Headings.js";
 import { SectionDescription } from "./misc/Typography";
 import axios from "axios";
 
 const HeadingContainer = tw.div`text-center`;
-const Subheading = tw(SubjeadingBase)`mb-4`;
+const Subheading = tw(SubheadingBase)`mb-4`;
 const Heading = tw(SectionHeading)``;
 const Description = tw(SectionDescription)`mx-auto`;
 

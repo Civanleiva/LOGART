@@ -75,6 +75,11 @@ const Hero = ({
           Login
         </NavLink>
       }
+      {userInfo.isAdmin && (
+        <NavLink href="/admin" tw="lg:ml-12!">
+        Admin
+      </NavLink>
+      )}
     </NavLinks>,
   ];
   return (

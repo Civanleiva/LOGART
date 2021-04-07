@@ -1,11 +1,12 @@
 import React from "react";
-import "./styles/globalStyles.css"
+import "./styles/globalStyles.css";
 import "tailwindcss/dist/base.css";
 import LandingPage from "./views/LandingPage.js";
 import SignInPage from "./views/SignInPage";
 import SignUpPage from "./views/SignUpPage";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import OrderProductPage from "./views/OrderProductPage";
+import AdminPage from "./views/AdminPage";
 
 function App() {
   return (
@@ -25,6 +26,10 @@ function App() {
 
         <Route path="/OrderProduct">
           <OrderProductPage />
+        </Route>
+
+        <Route path="/admin">
+          <AdminPage />
         </Route>
       </Switch>
     </Router>

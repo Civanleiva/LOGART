@@ -78,6 +78,9 @@ const OrderProductPage = ({
   const orderCreate = useSelector((state) => state.orderCreate);
   const { success, error, order } = orderCreate;
 
+  const userSignedIn = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignedIn;
+
   function handleShirtChange(event) {
     setShirtType(event.target.value);
     setShirtColor("#FFFFFF");
@@ -99,7 +102,6 @@ const OrderProductPage = ({
   let history = useHistory();
 
   const placeOrderHandler = () => {
-    console.log(files[0].getFileEncodeBase64String())
     dispatch(
       createOrder([
         {
@@ -107,7 +109,8 @@ const OrderProductPage = ({
           shirtColor: shirtColor,
           shirtMaterial: printMaterial,
           shirtSize: shirtSize,
-          image: files[0].getFileEncodeBase64String(),
+          image: files[0] ? files[0].getFileEncodeBase64String() : "",
+          email: userInfo.email,
         },
       ])
     );
@@ -115,8 +118,10 @@ const OrderProductPage = ({
 
   useEffect(() => {
     if (success) {
-      alert("Orden completada con exito, pronto recibirá un correo con detalles")
-      history.push('/');
+      alert(
+        "Orden completada con exito, pronto recibirá un correo con detalles"
+      );
+      history.push("/");
       dispatch({ type: ORDER_CREATE_RESET });
     }
   }, [success, dispatch, history, order]);
