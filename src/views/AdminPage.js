@@ -64,7 +64,7 @@ const AdminPage = ({ heading = "Órdenes" }) => {
   return (
     <div id="Orders">
       <Container>
-        {userInfo.isAdmin ? (
+        {userInfo && userInfo.isAdmin ? (
           <ContentWithPaddingXl>
             <HeadingContainer>
               {heading && <Heading>{heading}</Heading>}
