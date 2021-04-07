@@ -79,6 +79,7 @@ const AdminPage = ({ heading = "Órdenes" }) => {
                       <OrderInfo>{order.orderItem[0].shirtColor}</OrderInfo>
                       <OrderInfo>{order.orderItem[0].shirtType}</OrderInfo>
                       <OrderInfo>{order.orderItem[0].shirtMaterial}</OrderInfo>
+                      <OrderInfo>{order.orderItem[0].email}</OrderInfo>
                     </OrderType>
                   </Order>
                 </ProductContainer>
