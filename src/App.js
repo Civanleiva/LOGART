@@ -7,8 +7,12 @@ import SignUpPage from "./views/SignUpPage";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import OrderProductPage from "./views/OrderProductPage";
 import AdminPage from "./views/AdminPage";
+import { useSelector } from "react-redux";
 
 function App() {
+  const userSignedIn = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignedIn;
+
   return (
     <Router>
       <Switch>
@@ -25,7 +29,7 @@ function App() {
         </Route>
 
         <Route path="/OrderProduct">
-          <OrderProductPage />
+          {userInfo ? <OrderProductPage /> : <SignInPage />}
         </Route>
 
         <Route path="/admin">
